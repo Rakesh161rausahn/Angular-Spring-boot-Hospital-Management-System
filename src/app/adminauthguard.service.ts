@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AdminauthService } from './adminauth.service';
@@ -13,15 +12,11 @@ export class AdminauthguardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot
     ): boolean | Promise<boolean> | Observable<boolean>{
-    if (this.authService.isUserLoggedIn()) 
-    {
+    if (this.authService.isUserLoggedIn()) {
       return true;
+    } else {
+      this.router.navigate(['home']);
+      return false;
     }
-
-    else{
-
-    this.router.navigate(['home']);
-    return false;
-
-    }
+  }
 }
